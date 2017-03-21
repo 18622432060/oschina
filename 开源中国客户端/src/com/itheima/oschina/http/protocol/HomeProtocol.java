@@ -22,5 +22,4 @@ public class HomeProtocol extends BaseProtocol<List<News>> {
 		return "";// 如果没有参数,就传空串,不要传null
 	}
 
-
 }
