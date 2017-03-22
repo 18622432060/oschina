@@ -2,13 +2,12 @@ package com.itheima.oschina.ui.fragment;
 
 import java.util.List;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.http.protocol.HomeProtocol;
