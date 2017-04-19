@@ -2,6 +2,7 @@
 <lint>
     <issue id="ContentDescription" severity="ignore" />
     <issue id="HardcodedText" severity="ignore" />
+    <issue id="OldTargetApi" severity="ignore" />
     <issue id="PxUsage" severity="ignore" />
     <issue id="UseCompoundDrawables" severity="ignore" />
     <issue id="UselessParent" severity="ignore" />
