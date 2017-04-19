@@ -1,6 +1,5 @@
 package com.itheima.oschina.ui.view;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 
 import com.itheima.oschina.R;
 
-
+@SuppressWarnings("deprecation")
 public class QuickOptionDialog extends Dialog implements android.view.View.OnClickListener {
 
 	private ImageView mClose;
@@ -32,7 +31,6 @@ public class QuickOptionDialog extends Dialog implements android.view.View.OnCli
 		super(context, flag, listener);
 	}
 
-	@SuppressLint("InflateParams")
 	public QuickOptionDialog(Context context, int defStyle) {
 		super(context, defStyle);
 		View contentView = getLayoutInflater().inflate(R.layout.dialog_quick_option, null);
@@ -63,7 +61,6 @@ public class QuickOptionDialog extends Dialog implements android.view.View.OnCli
 		this(context, R.style.quick_option_dialog);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -94,7 +91,6 @@ public class QuickOptionDialog extends Dialog implements android.view.View.OnCli
 			mListener.onQuickOptionClick(id);
 		}
 		dismiss();
-
 	}
 
 }
