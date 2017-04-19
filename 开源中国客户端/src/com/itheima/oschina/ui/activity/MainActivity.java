@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -25,6 +26,7 @@ import com.itheima.oschina.ui.page.HomePager;
 import com.itheima.oschina.ui.page.MePager;
 import com.itheima.oschina.ui.page.NewsCenterPager;
 import com.itheima.oschina.ui.view.NoScrollViewPager;
+import com.itheima.oschina.ui.view.QuickOptionDialog;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -35,10 +37,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @date 2015-10-17
  */
 public class MainActivity extends BaseActivity implements OnClickListener {
-	
+
 	private ActionBarDrawerToggle toggle;
 	private ArrayList<BasePager> mPagers;// 四个标签页集合
-	
+
 	@ViewInject(R.id.vp_content)
 	private NoScrollViewPager mViewPager;
 
@@ -50,7 +52,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	@ViewInject(R.id.menu_item_opensoft)
 	private LinearLayout menuItemOpensoft;
-	
+
 	@ViewInject(R.id.menu_item_blog)
 	private LinearLayout menuItemBlog;
 
@@ -59,6 +61,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	@ViewInject(R.id.menu_item_rss)
 	private LinearLayout menuItemRss;
+
+	@ViewInject(R.id.im_quickoption)
+	private ImageView im_quickoption;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		menuItemBlog.setOnClickListener(this);
 		menuItemGitapp.setOnClickListener(this);
 		menuItemRss.setOnClickListener(this);
-		
+		im_quickoption.setOnClickListener(this);
 		initActionBar();
 		initData();
 	}
@@ -83,7 +88,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initActionBar() {
-		ActionBar actionBar = getActionBar();// 可以做侧拉 谷歌电子市场Day05 10.Actionbar的使用
+		ActionBar actionBar = getActionBar();// 可以做侧拉 谷歌电子市场Day05
+												// 10.Actionbar的使用
 		actionBar.setTitle("开源中国");// 设置标题
 		actionBar.setLogo(R.drawable.ic_launcher);// 设置logo
 		actionBar.setHomeButtonEnabled(true);// logo是否可以点击
@@ -93,33 +99,36 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
 
 		// 初始化抽屉开关
-		toggle = new ActionBarDrawerToggle(this, drawer,R.drawable.icon_pic_menu, R.string.drawer_open,R.string.drawer_close);
+		toggle = new ActionBarDrawerToggle(this, drawer, R.drawable.icon_pic_menu, R.string.drawer_open, R.string.drawer_close);
 
 		toggle.syncState();// 同步状态, 将DrawerLayout和开关关联在一起
 	}
 
+	/**
+	 * 菜单的选择
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case android.R.id.home:
-				toggle.onOptionsItemSelected(item);
-				break;
-			default:
-				break;
+		case android.R.id.home:
+			toggle.onOptionsItemSelected(item);
+			break;
+		default:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	public void initData() {
-		
+
 		mPagers = new ArrayList<BasePager>();
 		FragmentManager supportFragmentManager = getSupportFragmentManager();
 		// 添加四个标签页
-		mPagers.add(new HomePager(MainActivity.this,supportFragmentManager));
-		mPagers.add(new NewsCenterPager(MainActivity.this,supportFragmentManager));
-		mPagers.add(new ExplorePager(MainActivity.this,supportFragmentManager));
-		mPagers.add(new MePager(MainActivity.this,supportFragmentManager));
-		mViewPager.setOffscreenPageLimit(mPagers.size()-1);
+		mPagers.add(new HomePager(MainActivity.this, supportFragmentManager));
+		mPagers.add(new NewsCenterPager(MainActivity.this, supportFragmentManager));
+		mPagers.add(new ExplorePager(MainActivity.this, supportFragmentManager));
+		mPagers.add(new MePager(MainActivity.this, supportFragmentManager));
+		mViewPager.setOffscreenPageLimit(mPagers.size() - 1);
 
 		mViewPager.setAdapter(new ContentAdapter());
 		// 底栏标签切换监听
@@ -191,12 +200,24 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.menu_item_quests:
-			Intent intent = new Intent(this,QuestsActivity.class);
+			Intent intent = new Intent(this, QuestsActivity.class);
 			startActivity(intent);
 			break;
+		case R.id.im_quickoption:
+			shwoQuickOptionDialog();
+			break;
+
 		default:
 			break;
 		}
+	}
+
+	private void shwoQuickOptionDialog() {
+		QuickOptionDialog builder = new QuickOptionDialog(MainActivity.this);
+		builder.setCancelable(true);
+		builder.setCanceledOnTouchOutside(true);
+		builder.show();
+
 	}
 
 }
