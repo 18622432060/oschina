@@ -43,7 +43,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener{
 	// 如果加载数据成功, 就回调此方法, 在主线程运行
 	@Override
 	public View onCreateSuccessView() {
-		View view = UIUtils.inflate(R.layout.swipe_refresh_widget_sample);
+		View view = UIUtils.inflate(R.layout.pager_news_menu);
 		ViewUtils.inject(this,view);
 	
 		mSwipeRefreshWidget.setColorScheme(R.color.color1, R.color.color2, R.color.color3,R.color.color4);
