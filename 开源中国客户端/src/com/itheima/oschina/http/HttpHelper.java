@@ -24,7 +24,7 @@ import com.itheima.oschina.util.StringUtils;
 
 public class HttpHelper {
 
-	public static final String URL = "http://10.113.254.167:8080/";// "http://127.0.0.1:8090/"
+	public static final String URL = "http://192.168.56.2:8080/";// "http://127.0.0.1:8090/"
 
 	/** get请求，获取返回字符串内容 */
 	public static HttpResult get(String url) {
