@@ -2,6 +2,7 @@ package com.itheima.oschina.ui.holder;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itheima.oschina.R;
@@ -16,8 +17,8 @@ import com.itheima.oschina.util.UIUtils;
  */
 public class HomeHolder extends BaseHolder<News> implements OnClickListener {
 
-	private TextView tvTitle, tvBody, tvAuthor, tvPubdate, tvCommentcount;
-
+	public TextView tvTitle, tvBody, tvAuthor, tvPubdate, tvCommentcount,tv_hide;
+    public ImageView im_comment_count;
 	@Override
 	public View initView() {
 		// 1. 加载布局
@@ -28,7 +29,8 @@ public class HomeHolder extends BaseHolder<News> implements OnClickListener {
 		tvAuthor = (TextView) view.findViewById(R.id.tv_author);
 		tvPubdate = (TextView) view.findViewById(R.id.tv_pubdate);
 		tvCommentcount = (TextView) view.findViewById(R.id.tv_commentcount);
-
+		tv_hide = (TextView) view.findViewById(R.id.tv_hide);
+		im_comment_count = (ImageView) view.findViewById(R.id.im_comment_count);
 		return view;
 	}
 

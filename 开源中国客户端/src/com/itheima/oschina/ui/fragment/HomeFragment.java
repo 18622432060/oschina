@@ -31,7 +31,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author Kevin
  * @date 2015-10-27
  */
-@SuppressWarnings("deprecation")
 public class HomeFragment extends BaseFragment implements OnRefreshListener{
 
 	private List<News> data;
@@ -46,7 +45,9 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener{
 		View view = UIUtils.inflate(R.layout.pager_news_menu);
 		ViewUtils.inject(this,view);
 	
-		mSwipeRefreshWidget.setColorScheme(R.color.color1, R.color.color2, R.color.color3,R.color.color4);
+//		mSwipeRefreshWidget.setColorScheme(Color.YELLOW, Color.GREEN, Color.BLUE,Color.RED);
+		mSwipeRefreshWidget.setColorSchemeColors(Color.YELLOW, Color.GREEN, Color.GRAY,Color.BLUE);
+
 		mList.setAdapter(new HomeAdapter(data));
 		mList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -59,13 +60,15 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener{
 				// startActivity(intent);
 				// }
 				String readIds = PrefUtils.getString(UIUtils.getContext(), "read_ids", "");
-				News news = data.get(position);
-				if(!readIds.contains(String.valueOf(news.getId()))){
-					readIds = readIds + news.getId() + ",";// 1101 1102
+				if(position < data.size()){
+					News news = data.get(position);
+					if(!readIds.contains(String.valueOf(news.getId()))){
+						readIds = readIds + news.getId() + ",";// 1101 1102
+					}
+					PrefUtils.setString(UIUtils.getContext(),"read_ids",readIds);
+					TextView tvTitle = (TextView) view.findViewById(R.id.tv_title);
+					tvTitle.setTextColor(Color.GRAY);
 				}
-				PrefUtils.setString(UIUtils.getContext(),"read_ids",readIds);
-				TextView tvTitle = (TextView) view.findViewById(R.id.tv_title);
-				tvTitle.setTextColor(Color.GRAY);
 			}
 		});
 		mSwipeRefreshWidget.setOnRefreshListener(this);
